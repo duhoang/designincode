@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+
+    {% include cover.html %}
+    <div class="site-layout">
+
+      <div class="site-cover-column"></div>
+      <div class="site-main-column">
+        {{ content }}
+      </div>
+    </div>
+    {% include footer-dock.html %}
+  </body>
+
+</html>
