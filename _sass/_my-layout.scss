@@ -37,39 +37,7 @@ a, a:hover, a:visited {
     flex-grow: 1;
 }
 
-.footer-dock {
-    width: 100%;
-    min-height: 64px;
-    background: white;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 0 16px;
 
-    @include media-query($on-tablet) {
-        width: 75%;
-        padding: 0 32px;
-    }
-
-    @include media-query($on-laptop) {
-        width: 50%;
-    }
-
-    .footer-wrapper {
-        border-top: 1px solid $gray3;
-        padding: 16px 0 16px 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .footer-nav {
-        a {
-            margin-right: 48px;
-            font-size: 18px;
-        }
-    }
-}
 
 .page {
     padding: 32px 32px 120px;
@@ -130,4 +98,192 @@ a, a:hover, a:visited {
         box-shadow: inset 0 -2px 0 rgba(black, .3);
     }
 
+}
+
+.footer-dock {
+    width: 100%;
+    height: 100%;
+    min-height: 64px;
+    background: white;
+    position: fixed;
+    top: 100%;
+    right: 0;
+    transform: translateY(-84px);
+    display: flex;
+    flex-direction: column;
+    transition: transform .35s, top .35s;
+
+    &.show-footer {
+        top: 0;
+        transform: translateY(48px);
+        z-index: 10;
+        box-shadow: 0 -12px 48px 12px rgba(black, .4);
+
+        .footer-wrapper {
+            border-top: 0;
+        }   
+
+        .footer-nav .btn {
+            &.active:after {
+                opacity: 1 !important;
+            }
+        }    
+    }
+
+    @include media-query($on-palm) {
+        .footer-nav {
+            .btn {
+                display: inline-block !important;
+            }
+        }
+
+
+    }
+    @include media-query($on-tablet) {
+        width: 75%;
+
+        &.show-footer {
+            z-index: 0;
+        }
+
+        .footer-wrapper {
+            padding-left: 16px;
+        }
+    }
+
+    @include media-query($on-laptop) {
+        width: 50%;
+    }
+
+    .footer-wrapper {
+        border-top: 1px solid $gray3;
+        border-bottom: 1px solid $gray3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        margin: 0 16px 0 16px;
+        position: relative;
+
+    }
+
+    .footer-nav {
+        .btn {
+            display: none;
+            margin-right: 32px;
+            font-size: 18px;
+            padding: 28px 16px;
+            color: $teal;
+
+            &:first-child {
+                display: inline-block;
+            }
+            &.active {  
+                position: relative;
+                &:after {
+                    content: '';
+                    width: 100%;
+                    height: 4px;
+                    background: $teal;
+                    bottom: -1px;
+                    position: absolute;
+                    left: 0;
+                    z-index: 1;
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}
+
+.footer-body {
+    padding: 32px 16px 0 16px; 
+    position: relative;
+    overflow-y: auto;
+
+}
+
+.signup-arrow {
+    width: 32px;
+    height: 61px;
+    position: absolute;
+    right: 48px;
+    top: 100%;
+    transform: translateY(-16px);
+}
+
+.footer-heading {
+    color: $orange;
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: 300;
+    margin: 16px 0 40px 0;
+    text-align: center;
+}
+
+.footer-item {
+    position: relative;
+    margin: 16px auto;
+    text-align: center;
+    max-width: 480px;
+
+    @include media-query($on-tablet) {
+        padding: 0 80px;
+        text-align: left;
+        max-width: 640px;
+    }
+
+    .footer-item-gfx {
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        //border: 3px solid $gray4;
+        background: $yellow;
+        border-radius: 50%;
+        display: inline-block;
+        left: 0;
+
+        @include media-query($on-tablet) {
+            position: absolute;
+            top: 50%;
+            transform: translate(0%, -50%);
+        }
+    }
+    .footer-item-text {
+        padding: 8px 16px;
+    }
+
+    &.right {
+
+        @include media-query($on-tablet) {
+            .footer-item-gfx {
+                right: 0;
+                left: auto;
+                transform: translate(0%, -50%);
+            }
+            text-align: right;
+
+        }
+    }
+
+    &.center {
+        text-align: center;
+    }
+}
+
+.computer-gfx {
+    width: 386px;
+    height: 300px;
+    margin: 32px auto;
+}
+
+.hide-footer {
+    position: absolute;
+    color: white;
+    transform: translateY(-100%);
+    top: -12px;
+}
+
+.btn {
+    cursor: pointer;
 }
